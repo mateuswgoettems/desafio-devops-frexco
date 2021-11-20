@@ -84,7 +84,7 @@ docker build -t mateuswelter01/projects:reactapp-v1.0 .
 
 Utilizei a flag -t seguido de um nome, para dar um nome e tag ao container.
 
-Após terminar o build da imagem, podemos ve-la com o comando docker images
+Após terminar o build da imagem, podemos ve-la com o comando `docker images`
 
 ```
 REPOSITORY                TAG             IMAGE ID       CREATED              SIZE
