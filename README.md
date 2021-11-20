@@ -23,19 +23,26 @@ npm start
 Depois de ja ter a aplicação em mãos, rodando em máquina local, chegou a hora de isolarmos a aplicação em um container.
 Portanto, criei um arquivo chamado Dockerfile, e dentro do arquivo coloquei as seguites instruções:
    ```
-      FROM node:14-alpine3.14
+#Utiliza como base a imagem do Nodejs 14
+FROM node:14-alpine3.14
 
-      WORKDIR /home/src/app
+#Diretório de trabalho do Docker
+WORKDIR /home/src/app
 
-      COPY package*.json .
+#Copia o arquivo package.json para o container
+COPY package.json .
 
-      RUN npm install
+#Instala as dependencias do package.json no container
+RUN npm install
 
-      COPY . .
+#Copia todos os arquivos do diretório atual onde esta o Dockerfile para o container
+COPY . .
 
-      EXPOSE 3000
+Abre a porta 3000 para comunicação com o container.
+EXPOSE 3000
 
-      CMD [ "npm","start" ]
+Inicia o projeto no container
+CMD [ "npm","start" ]
    ```
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
