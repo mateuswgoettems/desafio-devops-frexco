@@ -60,6 +60,23 @@ EXPOSE 3000
 CMD [ "npm","start" ]
 ```
 
+#### Ao final, o arquivo deve ficar igual esse:
+```
+FROM node:14-alpine3.14
+
+WORKDIR /home/src/app
+
+COPY package*.json .
+
+RUN npm install
+
+COPY . .
+
+EXPOSE 3000
+
+CMD [ "npm","start" ]
+```
+
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
