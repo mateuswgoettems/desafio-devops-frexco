@@ -22,9 +22,12 @@ npm start
 
 Depois de ja ter a aplicação em mãos, rodando em máquina local, chegou a hora de isolarmos a aplicação em um container.
 Portanto, criei um arquivo chamado Dockerfile, e dentro do arquivo coloquei as seguites instruções:
-   ```
+
 #Utiliza como base a imagem do Nodejs 14
-FROM node:14-alpine3.14
+   ```
+   FROM node:14-alpine3.14
+   ```
+
 
 #Diretório de trabalho do Docker
 WORKDIR /home/src/app
