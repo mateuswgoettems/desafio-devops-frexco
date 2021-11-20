@@ -97,3 +97,32 @@ Agora, vamos subir essa imagem para o DockerHub. Para isso, é necessário ter u
 ````
 docker login
 ````
+Preenchido o login com as credenciais, vamos realizar o push dessa imagem para o DockerHub.
+
+```
+docker push mateuswelter01/projects:reactapp-v1.0
+
+```
+
+## Usando o docker-compose e o Dockerfile
+
+Agora, para utilizar o docker-compose, utilizamos um arquivo docker-compose de extensão .yaml (ou yml).
+
+O arquivo ficará assim:
+
+```
+version: '3'
+services:
+  react-app:
+    container_name: reactapp
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3000"
+```
+Aqui, utilizando o docker-compose, fizemos a build da imagem, e apontamos a porta 3001 da nossa maquina para a porta 3000 do container.
+
+Com isso, ja é possivel acessar a aplicação rodando na porta 3000 do nosso container na porta 3000 da maquina onde estamos executando o docker.
+
+
