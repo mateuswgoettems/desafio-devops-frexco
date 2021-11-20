@@ -123,6 +123,9 @@ services:
 ```
 Aqui, utilizando o docker-compose, fizemos a build da imagem, e apontamos a porta 3001 da nossa maquina para a porta 3000 do container.
 
-Com isso, ja é possivel acessar a aplicação rodando na porta 3000 do nosso container na porta 3000 da maquina onde estamos executando o docker.
+Com isso, ja é possivel acessar a aplicação rodando na porta 3000 do nosso container na porta 3001 da maquina onde estamos executando o docker.
 
+`Esse Projeto fui construindo usando uma instância free da Oracle Cloud!`
+#### Bônus - 1
+## Usando o Nginx
 
