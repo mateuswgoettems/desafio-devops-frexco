@@ -12,9 +12,9 @@ O desafio proposto é fazer o deploy de uma aplicação React, utilizando concei
 
 ### Começando...
 
-```npx create-react-app my-app`
+``npx create-react-app my-app`
 cd my-app
-npm start```
+npm start``
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
