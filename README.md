@@ -14,11 +14,29 @@ O desafio proposto é fazer o deploy de uma aplicação React, utilizando concei
 
 ### Instalação...
 ```
-npx create-react-app my-app
+npx create-react-app 
 cd my-app
 npm start
 ```
+## Partindo para Containers
 
+Depois de ja ter a aplicação em mãos, rodando em máquina local, chegou a hora de isolarmos a aplicação em um container.
+Portanto, criei um arquivo chamado Dockerfile, e dentro do arquivo coloquei as seguites instruções:
+   ```
+      FROM node:14-alpine3.14
+
+      WORKDIR /home/src/app
+
+      COPY package*.json .
+
+      RUN npm install
+
+      COPY . .
+
+      EXPOSE 3000
+
+      CMD [ "npm","start" ]
+   ```
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
