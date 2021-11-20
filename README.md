@@ -18,12 +18,12 @@ npx create-react-app
 cd my-app
 npm start
 ```
-## Partindo para Containers
+#### Partindo para Containers
 
 Depois de ja ter a aplicação em mãos, rodando em máquina local, chegou a hora de isolarmos a aplicação em um container.
 Portanto, criei um arquivo chamado Dockerfile, e dentro do arquivo coloquei as seguites instruções:
 
-## Utiliza como base a imagem do Nodejs 14
+#### Utiliza como base a imagem do Nodejs 14
    ```
    FROM node:14-alpine3.14
    ```
