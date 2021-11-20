@@ -1,0 +1,16 @@
+version: '3.7'
+services:
+  react-app:
+    container_name: reactapp
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    ports: 
+      - "3001:3000"
+    deploy:
+      placement:
+        mode: global
+        constraints: [node.role == worker]
+      restart_policy:
+        condition: on-failure
+        delay: 10s
