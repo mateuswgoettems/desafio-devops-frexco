@@ -24,31 +24,42 @@ Depois de ja ter a aplicação em mãos, rodando em máquina local, chegou a hor
 Portanto, criei um arquivo chamado Dockerfile, e dentro do arquivo coloquei as seguites instruções:
 
 #### Utiliza como base a imagem do Nodejs 14
-   ```
-   FROM node:14-alpine3.14
-   ```
+   
+```
+FROM node:14-alpine3.14
+```
 
-
-## Diretório de trabalho do Docker
+#### Diretório de trabalho do Docker
 ```
 WORKDIR /home/src/app
 ```
 
-#Copia o arquivo package.json para o container
+#### Copia o arquivo package.json para o container
+```
 COPY package.json .
+```
 
-#Instala as dependencias do package.json no container
+#### Instala as dependencias do package.json no container
+```
 RUN npm install
+```
 
-#Copia todos os arquivos do diretório atual onde esta o Dockerfile para o container
+#### Copia todos os arquivos do diretório atual onde esta o Dockerfile para o container
+
+```
 COPY . .
+```
 
-Abre a porta 3000 para comunicação com o container.
+#### Abre a porta 3000 para comunicação com o container.
+```
 EXPOSE 3000
+```
 
-Inicia o projeto no container
+#### Inicia o projeto no container
+```
 CMD [ "npm","start" ]
-   ```
+```
+
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
