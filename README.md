@@ -94,6 +94,6 @@ node                      14-alpine3.14   f7229193551e   7 days ago           11
 
 Agora, vamos subir essa imagem para o DockerHub. Para isso, é necessário ter uma conta no DockerHub.
 
-``
+````
 docker login
-``
+````
