@@ -91,3 +91,9 @@ REPOSITORY                TAG             IMAGE ID       CREATED              SI
 mateuswelter01/projects   reactapp-v1.0   dd8a03df4a65   About a minute ago   370MB
 node                      14-alpine3.14   f7229193551e   7 days ago           118MB
 ```
+
+Agora, vamos subir essa imagem para o DockerHub. Para isso, é necessário ter uma conta no DockerHub.
+
+``
+docker login
+``
