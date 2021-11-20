@@ -1,12 +1,18 @@
-# Getting Started with Create React App
+# Desafio DevOps Frexco
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+O desafio proposto é fazer o deploy de uma aplicação React, utilizando conceitos de DevOps
 
-## Available Scripts
+## Requisitos
 
-In the project directory, you can run:
+1 - Aplicação deverá ser versionada e publicada para apresentação em repositório git.
+2 - Instruções indispensáveis:
+    - Aplicação deverá conter um arquivo Dockerfile para realizar a build (construção da aplicação);
+    - O arquivo responsável por subir o container deverá ser o Docker-compose contendo as demais informações (Ex. porta, nome, imagem e etc...);
+    - O container deverá rodar em uma porta diferente da 3000, pois a aplicação em React já vem pré-configurada para isso, e queremos que explore e entenda as configurações de porta do Docker.
 
-### `yarn start`
+### `npx create-react-app my-app
+cd my-app
+npm start`
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
