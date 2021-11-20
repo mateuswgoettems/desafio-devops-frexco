@@ -10,9 +10,9 @@ O desafio proposto é fazer o deploy de uma aplicação React, utilizando concei
     - O arquivo responsável por subir o container deverá ser o Docker-compose contendo as demais informações (Ex. porta, nome, imagem e etc...);
     - O container deverá rodar em uma porta diferente da 3000, pois a aplicação em React já vem pré-configurada para isso, e queremos que explore e entenda as configurações de porta do Docker.
 
-### `npx create-react-app my-app
+### ```npx create-react-app my-app`
 cd my-app
-npm start`
+npm start```
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
