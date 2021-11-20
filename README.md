@@ -5,6 +5,7 @@ O desafio proposto é fazer o deploy de uma aplicação React, utilizando concei
 ## Requisitos
 
 1 - Aplicação deverá ser versionada e publicada para apresentação em repositório git.
+
 2 - Instruções indispensáveis:
     - Aplicação deverá conter um arquivo Dockerfile para realizar a build (construção da aplicação);
     - O arquivo responsável por subir o container deverá ser o Docker-compose contendo as demais informações (Ex. porta, nome, imagem e etc...);
