@@ -2,15 +2,25 @@ version: '3.7'
 services:
   react-app:
     container_name: reactapp
-    build: 
-      context: .
-      dockerfile: Dockerfile
+    image: mateuswelter/react:start-arm64 
     ports: 
       - "3001:3000"
     deploy:
       mode: global
       placement:
         constraints: [node.role == worker]
+      restart_policy:
+        condition: on-failure
+        delay: 10s
+  nginx:
+    container_name: nginx
+    image: mateuswelter/react:nginx
+    ports:
+      - "80:80"
+    deploy:
+      mode: global
+      placement:
+        constraints: [node.role == manager]
       restart_policy:
         condition: on-failure
         delay: 10s
