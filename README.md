@@ -1,70 +1,131 @@
-# Getting Started with Create React App
+# Desafio DevOps Frexco
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+O desafio proposto é fazer o deploy de uma aplicação React, utilizando conceitos de DevOps
 
-## Available Scripts
+## Requisitos
 
-In the project directory, you can run:
+1 - Aplicação deverá ser versionada e publicada para apresentação em repositório git.
 
-### `yarn start`
+2 - Instruções indispensáveis:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+   - Aplicação deverá conter um arquivo Dockerfile para realizar a build (construção da aplicação);
+   - O arquivo responsável por subir o container deverá ser o Docker-compose contendo as demais informações (Ex. porta, nome, imagem e etc...);
+   - O container deverá rodar em uma porta diferente da 3000, pois a aplicação em React já vem pré-configurada para isso, e queremos que explore e entenda as configurações de porta do Docker.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### Instalação...
+```
+npx create-react-app 
+cd my-app
+npm start
+```
+#### Partindo para Containers
 
-### `yarn test`
+Depois de ja ter a aplicação em mãos, rodando em máquina local, chegou a hora de isolarmos a aplicação em um container.
+Portanto, criei um arquivo chamado Dockerfile, e dentro do arquivo coloquei as seguites instruções:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+#### Utiliza como base a imagem do Nodejs 14
+   
+```
+FROM node:14-alpine3.14
+```
 
-### `yarn build`
+#### Diretório de trabalho do Docker
+```
+WORKDIR /home/src/app
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+#### Copia o arquivo package.json para o container
+```
+COPY package.json .
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+#### Instala as dependencias do package.json no container
+```
+RUN npm install
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+#### Copia todos os arquivos do diretório atual onde esta o Dockerfile para o container
 
-### `yarn eject`
+```
+COPY . .
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+#### Abre a porta 3000 para comunicação com o container.
+```
+EXPOSE 3000
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+#### Inicia o projeto no container
+```
+CMD [ "npm","start" ]
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+#### Ao final, o arquivo deve ficar igual esse:
+```
+FROM node:14-alpine3.14
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+WORKDIR /home/src/app
 
-## Learn More
+COPY package.json .
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+RUN npm install
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+COPY . .
 
-### Code Splitting
+EXPOSE 3000
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+CMD [ "npm","start" ]
+```
 
-### Analyzing the Bundle Size
+Construído o Dockerfile, vamos criar a imagem. Para isso, execute o comando:
+```
+docker build -t mateuswelter01/projects:reactapp-v1.0 .
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Utilizei a flag -t seguido de um nome, para dar um nome e tag ao container.
 
-### Making a Progressive Web App
+Após terminar o build da imagem, podemos ve-la com o comando `docker images`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+```
+REPOSITORY                TAG             IMAGE ID       CREATED              SIZE
+mateuswelter01/projects   reactapp-v1.0   dd8a03df4a65   About a minute ago   370MB
+node                      14-alpine3.14   f7229193551e   7 days ago           118MB
+```
 
-### Advanced Configuration
+Agora, vamos subir essa imagem para o DockerHub. Para isso, é necessário ter uma conta no DockerHub.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+````
+docker login
+````
+Preenchido o login com as credenciais, vamos realizar o push dessa imagem para o DockerHub.
 
-### Deployment
+```
+docker push mateuswelter01/projects:reactapp-v1.0
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+```
 
-### `yarn build` fails to minify
+## Usando o docker-compose e o Dockerfile
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Agora, para utilizar o docker-compose, utilizamos um arquivo docker-compose de extensão .yaml (ou yml).
+
+O arquivo ficará assim:
+
+```
+version: '3'
+services:
+  react-app:
+    container_name: reactapp
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3000"
+```
+Aqui, utilizando o docker-compose, fizemos a build da imagem, e apontamos a porta 3001 da nossa maquina para a porta 3000 do container.
+
+Com isso, ja é possivel acessar a aplicação rodando na porta 3000 do nosso container na porta 3001 da maquina onde estamos executando o docker.
+
+`Esse Projeto fui construindo usando uma instância free da Oracle Cloud!`
+#### Bônus - 1
+## Usando o Nginx
+
