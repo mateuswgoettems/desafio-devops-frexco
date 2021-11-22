@@ -1,4 +1,4 @@
-version: '3.7'
+version: '3'
 services:
   react-app:
     container_name: reactapp
@@ -9,18 +9,6 @@ services:
       mode: global
       placement:
         constraints: [node.role == worker]
-      restart_policy:
-        condition: on-failure
-        delay: 10s
-  nginx:
-    container_name: nginx
-    image: mateuswelter/react:nginx
-    ports:
-      - "80:80"
-    deploy:
-      mode: global
-      placement:
-        constraints: [node.role == manager]
       restart_policy:
         condition: on-failure
         delay: 10s
