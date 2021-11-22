@@ -129,3 +129,35 @@ Com isso, ja é possivel acessar a aplicação rodando na porta 3000 do nosso co
 #### Bônus - 1
 ## Usando o Nginx
 
+Usando o nginx, podemos usar o proxy reverso para consultarmos enderços Ip's sem mudarmos a URL onde estamos navegando.
+Para esse desafio, utilizei uma vm com ubuntu onde instalei o nginx.
+Aproveitei ainda, e fiz o deploy da aplicação com o Docker Swarm, deixando a aplicação disponível em 4 endereços Ip's diferentes, o que deixa a aplicação o máximo de tempo disponível.
+
+Os arquivos de configuração do nginx ficaram assim:
+```
+upstream loadbalancer {
+	server "aqui vai o endereço IP do servidor docker que está rodando o container com a aplicação react":3001;
+	server aqui vai o endereço IP do servidor docker que está rodando o container com a aplicação react:3001;
+	server aqui vai o endereço IP do servidor docker que está rodando o container com a aplicação react:3001;
+	server aqui vai o endereço IP do servidor docker que está rodando o container com a aplicação react:3001;
+}
+
+server {
+	listen 80;
+	server_name mateuswelter.tk;
+	location / {
+		proxy_pass http://loadbalancer;
+	}
+}
+
+server {
+	listen 80;
+	server_name react.mateuswelter.tk;
+	location / {
+		proxy_pass http://loadBalancer;
+	}
+}
+
+```
+#### Bonus - 2
+Usei maquinas virtuais com Linux Ubuntu 20.04
