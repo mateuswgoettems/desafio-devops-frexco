@@ -159,7 +159,7 @@ server {
 }
 
 ```
-O projeto está online e está disponível nesse link: http://react.mateuswelter.tk
+O projeto está online e está disponível nesse link: https://react.mateuswelter.tk
 
 #### Bonus - 2
 Usei maquinas virtuais com Linux Ubuntu 20.04
