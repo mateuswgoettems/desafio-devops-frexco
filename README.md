@@ -136,10 +136,10 @@ Aproveitei ainda, e fiz o deploy da aplicação com o Docker Swarm, deixando a a
 Os arquivos de configuração do nginx ficaram assim:
 ```
 upstream loadbalancer {
-	server "aqui vai o endereço IP do servidor docker que está rodando o container com a aplicação react":3001;
-	server aqui vai o endereço IP do servidor docker que está rodando o container com a aplicação react:3001;
-	server aqui vai o endereço IP do servidor docker que está rodando o container com a aplicação react:3001;
-	server aqui vai o endereço IP do servidor docker que está rodando o container com a aplicação react:3001;
+	worker01.tk:3001;
+	worker02.tk:3001;
+	worker03.tk:3001;
+	worker04.tk:3001;
 }
 
 server {
